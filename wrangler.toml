@@ -5,7 +5,7 @@ compatibility_date = "2024-01-01"
 # KV 바인딩 (데이터베이스 역할)
 [[kv_namespaces]]
 binding = "BLOG_DB"
-id = "YOUR_KV_NAMESPACE_ID_HERE"
+id = "55ea199daf1b46f1b7869d544ed10c36"
 
 # AI 바인딩 (Llama-3, Stable Diffusion 사용)
 [ai]
