@@ -1,0 +1,13 @@
+name = "my-ai-blog"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+# DB 연결 (이름은 반드시 DB여야 코드가 작동함)
+[[d1_databases]]
+binding = "DB"
+database_name = "blog_db"
+database_id = "연결후생성됨"
+
+# AI 기능 사용 선언
+[ai]
+binding = "AI"
