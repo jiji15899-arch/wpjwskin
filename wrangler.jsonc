@@ -1,5 +1,5 @@
 {
-  "name": "my-wp-worker",
+  "name": "ai-blog-mockwordpress",
   "compatibility_date": "2024-01-01",
   "main": "worker.js",
   "kv_namespaces": [
