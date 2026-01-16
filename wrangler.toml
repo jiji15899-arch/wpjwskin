@@ -1,15 +1,12 @@
-# Cloudflare Pages 배포 설정
-# 제작: 아백 (아로스)
-# 생성일: 2026-01-16
-
 name = "ai-blog-mockwordpress"
-compatibility_date = "2026-01-16"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
 
-[assets]
-directory = "."
-html_handling = "auto-trailing-slash"
+# KV 바인딩 (데이터베이스 역할)
+[[kv_namespaces]]
+binding = "BLOG_DB"
+id = "YOUR_KV_NAMESPACE_ID_HERE"
 
-# 404 페이지 설정
-[[assets.fallback_routes]]
-pattern = "/*"
-destination = "/src/index.js"
+# AI 바인딩 (Llama-3, Stable Diffusion 사용)
+[ai]
+binding = "AI"
