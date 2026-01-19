@@ -1,15 +1,12 @@
 <?php
 /**
  * 지원금 테마 핵심 기능 파일
- * API 키 및 탭 활성화 기능 포함 버전
+ * Puter.js AI 기반 버전 (OpenRouter 제거됨)
  */
 
 if (!defined('ABSPATH')) exit;
 
-// 1. OpenRouter API 키 설정
-if (!defined('SUPPORT_AI_API_KEY')) {
-    define('SUPPORT_AI_API_KEY', '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');
-}
+// 1. Puter.js는 클라이언트 사이드에서 작동하므로 서버 API 키 설정이 필요 없습니다.
 
 /**
  * 2. 테마 초기화 및 스타일 로드
@@ -58,8 +55,10 @@ function sup_page_cards() {
     }
     $cards = get_option('sup_final_cards_data', []);
     ?>
+    <script src="https://js.puter.com/v2/"></script>
+
     <div class="wrap">
-        <h1>지원금 카드 관리</h1>
+        <h1>지원금 카드 관리 (Puter.js AI)</h1>
         <form method="post">
             <?php wp_nonce_field('sup_save_cards_action', 'sup_nonce'); ?>
             <div id="sup-card-list">
@@ -75,6 +74,7 @@ function sup_page_cards() {
     </div>
     <script>
     jQuery(document).ready(function($) {
+        // 카드 추가 로직
         $('#add-card-btn').on('click', function() {
             var count = new Date().getTime();
             var template = $('.sup-card-item').first().clone();
@@ -85,25 +85,55 @@ function sup_page_cards() {
             });
             $('#sup-card-list').append(template);
         });
+
+        // 카드 삭제 로직
         $(document).on('click', '.remove-card', function() {
             if ($('.sup-card-item').length > 1) $(this).closest('.sup-card-item').remove();
         });
+
+        // [변경됨] Puter.js를 이용한 AI 자동입력 로직
         $(document).on('click', '.ai-fetch-btn', function() {
             var btn = $(this);
             var container = btn.closest('.sup-card-item');
             var keyword = container.find('.input-keyword').val();
+            
             if (!keyword) return alert('정책명을 입력하세요.');
-            btn.text('AI 분석중...').prop('disabled', true);
-            $.post(ajaxurl, { action: 'sup_ai_fetch', keyword: keyword, security: '<?php echo wp_create_nonce("sup_ai_nonce"); ?>' }, function(res) {
-                if (res.success) {
-                    container.find('.input-amount').val(res.data.amount);
-                    container.find('.input-amountSub').val(res.data.amountSub);
-                    container.find('.input-target').val(res.data.target);
-                    container.find('.input-period').val(res.data.period);
-                    container.find('.input-desc').val(res.data.description);
-                } else { alert('AI 오류: ' + res.data); }
-                btn.text('AI 자동입력').prop('disabled', false);
-            });
+            
+            btn.text('Puter AI 분석중...').prop('disabled', true);
+
+            // 프롬프트 구성
+            var prompt = "대한민국 정부정책 '" + keyword + "'에 대한 정보를 다음 JSON 형식으로만 정확하게 답해줘. 마크다운이나 잡담 없이 오직 JSON만 출력해. \nFormat: {\"amount\": \"지원금액(숫자와 단위)\", \"amountSub\": \"금액 부연설명(짧게)\", \"target\": \"지원대상\", \"period\": \"신청시기\", \"description\": \"정책 한줄 설명(80자 이내)\"}";
+
+            // Puter.js 호출
+            puter.ai.chat(prompt)
+                .then(function(response) {
+                    var content = response.message.content; // Puter v2 응답 구조 확인 필요 (일반적으로 text 또는 message.content)
+                    
+                    // JSON 파싱 (마크다운 코드 블록 제거)
+                    try {
+                        // ```json ... ``` 패턴 제거
+                        var jsonStr = content.replace(/```json\s*|\s*```/g, '').replace(/```/g, '').trim();
+                        var data = JSON.parse(jsonStr);
+
+                        container.find('.input-amount').val(data.amount);
+                        container.find('.input-amountSub').val(data.amountSub);
+                        container.find('.input-target').val(data.target);
+                        container.find('.input-period').val(data.period);
+                        container.find('.input-desc').val(data.description);
+                        
+                        alert('분석 완료!');
+                    } catch (e) {
+                        console.error(e);
+                        console.log("Raw Response:", content);
+                        alert('데이터 파싱 실패. 콘솔을 확인하세요.');
+                    }
+                })
+                .catch(function(err) {
+                    alert('Puter AI 오류: ' + err);
+                })
+                .finally(function() {
+                    btn.text('AI 자동입력').prop('disabled', false);
+                });
         });
     });
     </script>
@@ -179,32 +209,4 @@ function sup_page_ads() {
     <?php
 }
 
-/**
- * 4. AI AJAX 엔진 (OpenRouter)
- */
-function sup_ajax_ai_fetch() {
-    check_ajax_referer('sup_ai_nonce', 'security');
-    $keyword = sanitize_text_field($_POST['keyword']);
-    
-    $response = wp_remote_post('https://openrouter.ai/api/v1/chat/completions', [
-        'headers' => [
-            'Authorization' => 'Bearer ' . SUPPORT_AI_API_KEY,
-            'Content-Type'  => 'application/json',
-            'HTTP-Referer'  => home_url(),
-        ],
-        'body' => json_encode([
-            'model' => 'openai/gpt-4o-mini',
-            'messages' => [['role' => 'user', 'content' => "정부정책 '{$keyword}' 정보를 다음 JSON으로만 답해줘: {amount, amountSub, description, target, period}"]]
-        ]),
-        'timeout' => 20
-    ]);
-
-    if (is_wp_error($response)) wp_send_json_error('API 연결 실패');
-    $body = json_decode(wp_remote_retrieve_body($response), true);
-    $content = $body['choices'][0]['message']['content'] ?? '';
-    $json = json_decode(preg_replace('/```json\s*|\s*```/', '', $content), true);
-    
-    if ($json) wp_send_json_success($json);
-    else wp_send_json_error('데이터 추출 실패');
-}
-add_action('wp_ajax_sup_ai_fetch', 'sup_ajax_ai_fetch');
+// 기존의 sup_ajax_ai_fetch 함수는 더 이상 필요하지 않아 제거되었습니다.
