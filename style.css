@@ -28,7 +28,7 @@ body {
     flex-direction: column;
     margin: 0;
     background-color: white;
-    padding-top: 120px;
+    padding-top: 140px;
     font-size: 16px;
     line-height: 1.6;
     color: #333;
@@ -50,7 +50,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 40px !important;
+    height: 60px !important;
     background: white;
     z-index: 1000;
     margin: 0 !important;
@@ -62,7 +62,7 @@ body {
     position: relative;
     width: 100%;
     background: white;
-    margin: 4px 0;
+    margin: 8px 0;
 }
 
 .header .container {
@@ -71,44 +71,44 @@ body {
     justify-content: center;
     max-width: 768px;
     margin: 0 auto;
-    height: 24px;
+    height: 44px;
     padding: 0;
-    gap: 4px;
+    gap: 8px;
 }
 
 .logo {
     display: flex;
     align-items: center;
-    height: 24px;
+    height: 44px;
 }
 
 .logo img {
-    height: 30px;
+    height: 44px;
     width: auto;
     vertical-align: middle;
 }
 
 .logo-text {
-    font-size: 20px;
+    font-size: 28px;
     font-weight: 600;
     margin: 0 !important;
     padding: 0 !important;
     color: #000;
     display: flex;
     align-items: center;
-    height: 24px;
-    line-height: 24px;
+    height: 44px;
+    line-height: 44px;
 }
 
 /* ========== 탭 고정 ========== */
 .tab-wrapper {
     position: fixed;
-    top: 42px;
+    top: 62px;
     left: 0;
     width: 100%;
     background: white;
     z-index: 999;
-    padding: 0 8px;
+    padding: 8px 12px;
     box-sizing: border-box;
     box-shadow: 0 2px 4px rgba(0,0,0,0.08);
 }
@@ -116,7 +116,7 @@ body {
 .tab-container {
     background: white;
     border-radius: 50px;
-    padding: 2px;
+    padding: 4px;
     margin: 0 auto;
     max-width: 768px;
     width: 100%;
@@ -141,15 +141,15 @@ body {
 
 .tab-link {
     display: block;
-    padding: 10px 4px;
+    padding: 14px 8px;
     text-decoration: none;
     color: #6B7280;
     border-radius: 25px;
     transition: all 0.3s ease;
-    min-height: 40px;
-    line-height: 1.2;
+    min-height: 50px;
+    line-height: 1.3;
     word-break: keep-all;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 500;
     white-space: nowrap;
     overflow: hidden;
@@ -259,6 +259,379 @@ body {
     text-decoration: none;
     color: inherit;
     cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+    background-color: rgb(248, 249, 250);
+}
+
+.aros-gray-button a {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    text-decoration: none;
+    font-weight: 600;
+    width: 100%;
+    color: #4f5050;
+}
+
+.aros-gray-button span {
+    font-size: 16px;
+    opacity: 0.8;
+}
+
+/* 하단 버튼 */
+.bottom-button {
+    align-items: center;
+    background: rgb(101, 40, 247);
+    border-radius: 12px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    font-size: 17px;
+    font-weight: 600;
+    justify-content: space-between;
+    letter-spacing: -0.5px;
+    margin-top: 20px;
+    padding: 18px;
+    transition: 0.3s;
+    width: 100%;
+}
+
+.bottom-button:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 15px rgba(101, 40, 247, 0.3);
+}
+
+/* ========== 혜택 카드 (관련 글) ========== */
+.benefit-card {
+    background: rgb(248, 249, 251);
+    border-radius: 16px;
+    margin: 20px 0;
+    padding: 25px;
+}
+
+.benefit-card a {
+    text-decoration: none;
+}
+
+.benefit-title {
+    align-items: center;
+    display: flex;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.benefit-title .icon {
+    color: #ff4d4d;
+    margin-right: 8px;
+}
+
+.benefit-list {
+    background: rgb(243, 244, 246);
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.benefit-list a {
+    text-decoration: none;
+}
+
+.benefit-item {
+    align-items: center;
+    background: white;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding: 16px;
+    transition: 0.3s;
+}
+
+.benefit-item:hover {
+    transform: scale(1.02);
+    background-color: #f8f9fa;
+}
+
+.benefit-text {
+    color: #333333;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+}
+
+/* ========== 광고 카드 스타일 ========== */
+.ad-card {
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    padding: 16px;
+    margin: 24px 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column: 1 / -1;
+}
+
+/* ========== 푸터 ========== */
+.footer {
+    flex-shrink: 0;
+    background: #E3F2FD;
+    color: #333;
+    padding: 20px 0;
+    margin-top: 30px;
+    width: 100%;
+}
+
+.footer-content {
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 0 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.footer-left {
+    flex: 1;
+}
+
+.footer-right {
+    text-align: right;
+}
+
+.footer-right a {
+    color: #1976D2;
+    text-decoration: none;
+}
+
+.footer-right a:hover {
+    text-decoration: underline;
+}
+
+.footer-brand {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #1976D2;
+}
+
+.footer-info {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-info li {
+    margin-bottom: 2px;
+    color: #666;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.footer-copyright {
+    color: #666;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+/* ========== 반응형 ========== */
+@media (max-width: 768px) {
+    body {
+        font-size: 16px;
+        padding-top: 130px;
+    }
+
+    #header {
+        height: 56px !important;
+    }
+
+    .header .container {
+        height: 40px;
+    }
+
+    .logo {
+        height: 40px;
+    }
+
+    .logo img {
+        height: 40px;
+    }
+
+    .logo-text {
+        font-size: 24px;
+        height: 40px;
+        line-height: 40px;
+    }
+
+    .tab-wrapper {
+        top: 58px;
+    }
+
+    .tab-link {
+        padding: 12px 6px;
+        font-size: 14px;
+        min-height: 48px;
+    }
+
+    .intro-section {
+        padding: 24px 16px 20px;
+    }
+
+    .intro-title {
+        font-size: 28px;
+    }
+
+    .info-box {
+        padding: 20px;
+    }
+
+    .info-card-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .hero-section {
+        padding: 32px 20px;
+        border-radius: 20px;
+    }
+
+    .hero-title {
+        font-size: 28px;
+    }
+
+    .hero-cta {
+        padding: 16px 32px;
+        font-size: 16px;
+        width: 100%;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-right {
+        text-align: center;
+        width: 100%;
+    }
+
+    .footer-info li {
+        margin-bottom: 8px;
+    }
+
+    .container {
+        padding: 10px;
+        width: 100% !important;
+    }
+
+    .post-content h1 {
+        font-size: 28px;
+    }
+
+    .post-content h2 {
+        font-size: 24px;
+    }
+
+    .post-content h3 {
+        font-size: 20px;
+    }
+
+    .ad-card {
+        background: transparent;
+        border-radius: 0;
+        box-shadow: none;
+        border: none;
+        padding: 0;
+        margin: 16px 0;
+    }
+
+    .aros-gray-button,
+    .aros-blue-button {
+        height: auto;
+        min-height: 60px;
+        font-size: 20px;
+        padding: 1rem;
+    }
+
+    .aros-gray-card h2,
+    .aros-gray-card-center h2 {
+        font-size: 26px;
+    }
+
+    .aros-gray-card h3,
+    .aros-gray-card-center h3 {
+        font-size: 22px;
+    }
+
+    .aros-gray-card .apply-date-text {
+        font-size: 22px;
+    }
+
+    .aros-gray-card .highlight-text {
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    body {
+        padding-top: 120px;
+    }
+
+    #header {
+        height: 52px !important;
+    }
+
+    .header .container {
+        height: 36px;
+    }
+
+    .logo {
+        height: 36px;
+    }
+
+    .logo img {
+        height: 36px;
+    }
+
+    .logo-text {
+        font-size: 20px;
+        height: 36px;
+        line-height: 36px;
+    }
+
+    .tab-wrapper {
+        top: 54px;
+    }
+
+    .tab-link {
+        font-size: 13px;
+        padding: 10px 4px;
+        min-height: 44px;
+    }
+
+    .post-content h1 {
+        font-size: 24px;
+    }
+
+    .post-content h2 {
+        font-size: 20px;
+    }
+
+    .aros-gray-button,
+    .aros-blue-button {
+        font-size: 18px;
+    }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
     position: relative;
     overflow: hidden;
     border: 1px solid rgba(0, 0, 0, 0.04);
@@ -563,7 +936,7 @@ body {
 
 /* 포스트 제목 */
 .post-content h1 {
-    font-size: 28px;
+    font-size: 32px;
     font-weight: 800;
     color: #1a1a1a;
     margin: 30px 0 20px;
@@ -572,7 +945,7 @@ body {
 }
 
 .post-content h2 {
-    font-size: 24px;
+    font-size: 26px;
     font-weight: 700;
     color: #3182F6;
     margin: 30px 0 15px;
@@ -580,7 +953,7 @@ body {
 }
 
 .post-content h3 {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 700;
     color: #333;
     margin: 25px 0 12px;
@@ -588,7 +961,7 @@ body {
 }
 
 .post-content h4 {
-    font-size: 18px;
+    font-size: 19px;
     font-weight: 600;
     color: #444;
     margin: 20px 0 10px;
@@ -753,7 +1126,7 @@ body {
 }
 
 .aros-blue-card h2 {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
     color: #2196F3;
     margin: 2px 0 15px;
@@ -793,14 +1166,14 @@ body {
 }
 
 .aros-gray-card h2 {
-    font-size: 28px;
+    font-size: 30px;
     font-weight: bold;
     color: #6528f7;
     margin: 0 0 10px;
 }
 
 .aros-gray-card h3 {
-    font-size: 23px;
+    font-size: 24px;
     font-weight: bold;
     color: #363636;
     margin: 0 0 5px;
@@ -833,7 +1206,7 @@ body {
 
 .aros-gray-card .apply-date-text {
     color: #6528f7;
-    font-size: 22px;
+    font-size: 24px;
     font-weight: bold;
 }
 
@@ -850,7 +1223,7 @@ body {
 
 .aros-gray-card .highlight-text {
     color: #6528f7;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
 }
 
@@ -865,21 +1238,21 @@ body {
 }
 
 .aros-gray-card-center h2 {
-    font-size: 28px;
+    font-size: 30px;
     font-weight: bold;
     color: #6528f7;
     margin: 0 0 10px;
 }
 
 .aros-gray-card-center h3 {
-    font-size: 24px;
+    font-size: 26px;
     font-weight: bold;
     color: #363636;
     margin: 0 0 5px;
 }
 
 .aros-gray-card-center h4 {
-    font-size: 16px;
+    font-size: 17px;
     font-weight: normal;
     color: #666;
     margin: 10px 0;
@@ -896,7 +1269,7 @@ body {
 }
 
 .aros-white-card h2 {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
     color: #6528f7;
     margin: 2px 0 15px;
@@ -924,6 +1297,11 @@ body {
 .aros-white-card p {
     margin-bottom: 15px;
     line-height: 1.6;
+}
+
+/* apply-date-text 볼드 처리 추가 */
+.apply-date-text {
+    font-weight: bold !important;
 }
 
 /* ========== 버튼 스타일 ========== */
@@ -1261,19 +1639,19 @@ body {
 
     .tab-link {
         padding: 10px 8px;
-        font-size: 14px;
+        font-size: 15px;
     }
 
     .post-content h1 {
-        font-size: 24px;
+        font-size: 32px;
     }
 
     .post-content h2 {
-        font-size: 20px;
+        font-size: 26px;
     }
 
     .post-content h3 {
-        font-size: 18px;
+        font-size: 22px;
     }
 
     .ad-card {
