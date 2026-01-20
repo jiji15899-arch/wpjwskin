@@ -1581,7 +1581,45 @@ body {
 /* ========== 반응형 ========== */
 @media (max-width: 768px) {
     body {
-        font-size: 18px;
+        font-size: 16px;
+        padding-top: 140px;
+    }
+
+    #header {
+        height: 56px !important;
+    }
+
+    .header .container {
+        height: 40px;
+    }
+
+    .logo {
+        height: 40px;
+    }
+
+    .logo img {
+        height: 40px;
+    }
+
+    .logo-text {
+        font-size: 24px;
+        height: 40px;
+        line-height: 40px;
+    }
+
+    .tab-wrapper {
+        top: 58px;
+        padding: 8px 12px;
+    }
+
+    .tab-container {
+        padding: 4px;
+    }
+
+    .tab-link {
+        padding: 14px 8px;
+        font-size: 15px;
+        min-height: 52px;
     }
 
     .intro-section {
@@ -1589,7 +1627,7 @@ body {
     }
 
     .intro-title {
-        font-size: 24px;
+        font-size: 28px;
     }
 
     .info-box {
@@ -1607,7 +1645,7 @@ body {
     }
 
     .hero-title {
-        font-size: 26px;
+        font-size: 28px;
     }
 
     .hero-cta {
@@ -1637,13 +1675,8 @@ body {
         width: 100% !important;
     }
 
-    .tab-link {
-        padding: 10px 8px;
-        font-size: 15px;
-    }
-
     .post-content h1 {
-        font-size: 32px;
+        font-size: 30px;
     }
 
     .post-content h2 {
@@ -1652,6 +1685,10 @@ body {
 
     .post-content h3 {
         font-size: 22px;
+    }
+
+    .post-content h4 {
+        font-size: 19px;
     }
 
     .ad-card {
@@ -1666,17 +1703,131 @@ body {
     .aros-gray-button,
     .aros-blue-button {
         height: auto;
-        min-height: 60px;
-        font-size: 18px;
-        padding: 1rem;
+        min-height: 70px;
+        font-size: 22px;
+        padding: 1.2rem;
+    }
+
+    .aros-gray-card h2,
+    .aros-gray-card-center h2 {
+        font-size: 30px;
+    }
+
+    .aros-gray-card h3,
+    .aros-gray-card-center h3 {
+        font-size: 24px;
+    }
+
+    .aros-gray-card .apply-date-text {
+        font-size: 26px;
+    }
+
+    .aros-gray-card .highlight-text {
+        font-size: 24px;
+    }
+
+    .aros-blue-card h2,
+    .aros-white-card h2 {
+        font-size: 24px;
+    }
+
+    .aros-gray-card,
+    .aros-gray-card-center,
+    .aros-blue-card,
+    .aros-white-card {
+        padding: 26px;
+    }
+
+    .aros-gray-card p,
+    .aros-blue-card p,
+    .aros-white-card p,
+    .aros-gray-card li,
+    .aros-blue-card li,
+    .aros-white-card li {
+        font-size: 16px;
     }
 }
 
 @media screen and (max-width: 400px) {
+    body {
+        padding-top: 130px;
+    }
+
+    #header {
+        height: 52px !important;
+    }
+
+    .header .container {
+        height: 36px;
+    }
+
+    .logo {
+        height: 36px;
+    }
+
+    .logo img {
+        height: 36px;
+    }
+
+    .logo-text {
+        font-size: 20px;
+        height: 36px;
+        line-height: 36px;
+    }
+
+    .tab-wrapper {
+        top: 54px;
+        padding: 6px 10px;
+    }
+
+    .tab-container {
+        padding: 3px;
+    }
+
     .tab-link {
-        font-size: 12px;
-        padding: 8px 2px;
-        min-height: 36px;
+        font-size: 14px;
+        padding: 12px 6px;
+        min-height: 48px;
+    }
+
+    .post-content h1 {
+        font-size: 26px;
+    }
+
+    .post-content h2 {
+        font-size: 22px;
+    }
+
+    .post-content h3 {
+        font-size: 20px;
+    }
+
+    .aros-gray-button,
+    .aros-blue-button {
+        font-size: 20px;
+        min-height: 65px;
+    }
+
+    .aros-gray-card h2,
+    .aros-gray-card-center h2 {
+        font-size: 26px;
+    }
+
+    .aros-gray-card h3,
+    .aros-gray-card-center h3 {
+        font-size: 22px;
+    }
+
+    .aros-blue-card h2,
+    .aros-white-card h2 {
+        font-size: 22px;
+    }
+
+    .aros-gray-card,
+    .aros-gray-card-center,
+    .aros-blue-card,
+    .aros-white-card {
+        padding: 22px;
     }
 }
 
