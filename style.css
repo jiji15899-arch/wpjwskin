@@ -3,8 +3,8 @@ Theme Name: 지원금 테마
 Theme URI: https://example.com
 Author: Your Name
 Author URI: https://example.com
-Description: AI 기반 지원금 정보 워드프레스 테마 (생성기 호환 패치)
-Version: 2.2
+Description: AI 기반 지원금 정보 워드프레스 테마 (본문 탭 메뉴 점 제거 및 가독성 패치 완료)
+Version: 2.3
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: 지원금-테마
@@ -12,7 +12,7 @@ Text Domain: 지원금-테마
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap');
 
-/* ========== 1. 초기화 및 기본 타이포그래피 ========== */
+/* ========== 1. 초기화 및 기본 설정 ========== */
 * {
     margin: 0;
     padding: 0;
@@ -31,8 +31,8 @@ body {
     flex-direction: column;
     margin: 0;
     background-color: white;
-    padding-top: 140px; /* 헤더+탭 높이 확보 */
-    font-size: 18px; /* 기본 폰트 크기 확대 */
+    padding-top: 140px; /* 헤더 + 상단 탭 높이 */
+    font-size: 18px;
     line-height: 1.7;
     color: #222;
 }
@@ -47,7 +47,7 @@ body {
     padding: 0 16px;
 }
 
-/* ========== 2. 글로벌 헤더 (사이트 상단 고정) ========== */
+/* ========== 2. 고정 헤더 & 글로벌 탭 (상단 고정용) ========== */
 #header {
     position: fixed !important;
     top: 0;
@@ -68,30 +68,11 @@ body {
     justify-content: center;
 }
 
-.header .container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-}
+.logo img { height: 36px; width: auto; }
+.logo-text { font-size: 24px; font-weight: 800; color: #000; margin-left: 8px; }
 
-.logo img {
-    height: 36px;
-    width: auto;
-}
-
-.logo-text {
-    font-size: 24px;
-    font-weight: 800;
-    color: #000;
-    margin-left: 8px;
-    line-height: 1;
-}
-
-/* ========== 3. 글로벌 탭 메뉴 (사이트 상단 고정) ========== */
-/* 주의: 본문(post-content) 밖에 있는 tab-wrapper만 고정시킴 */
-body > .main-wrapper > .tab-wrapper,
-body > .tab-wrapper {
+/* 상단 고정 탭 메뉴 */
+body > .main-wrapper > .tab-wrapper {
     position: fixed;
     top: 60px;
     left: 0;
@@ -102,56 +83,79 @@ body > .tab-wrapper {
     box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
 }
 
-/* 공통 탭 스타일 */
-.tab-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0 8px;
+/* ========== 3. 본문 내 탭 메뉴 (점 제거 및 디자인 일치) ========== */
+
+/* 워드프레스가 본문 리스트에 강제로 넣는 점 제거 */
+.post-content .tab-wrapper ul,
+.post-content .tab-wrapper li {
+    list-style: none !important;
+    list-style-type: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-indent: 0 !important;
 }
 
-.tabs {
-    display: flex;
-    justify-content: space-between;
-    gap: 8px;
-    list-style: none;
-    background: #f3f4f6;
-    padding: 6px;
-    border-radius: 12px;
+.post-content .tab-wrapper li::before {
+    content: none !important;
+    display: none !important;
 }
 
-.tab-item {
-    flex: 1;
-    text-align: center;
+/* 글 내부 탭 위치 설정 (고정 해제) */
+.post-content .tab-wrapper {
+    position: static !important;
+    padding: 0 !important;
+    margin: 30px 0 !important;
+    width: 100% !important;
 }
 
-.tab-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 48px;
-    text-decoration: none;
-    color: #6B7280;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 700;
-    transition: all 0.2s;
+/* 탭 바디 (스킨과 동일한 캡슐 디자인) */
+.post-content .tabs {
+    display: flex !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    background: #f3f4f6 !important;
+    padding: 6px !important;
+    border-radius: 50px !important;
+    border: none !important;
 }
 
-.tab-link.active {
-    background: white;
-    color: #3182F6;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+.post-content .tab-item {
+    flex: 1 !important;
 }
 
-/* ========== 4. 블로그 포스트 본문 스타일 (핵심) ========== */
+/* 탭 버튼 스타일 (스킨과 100% 동일 크기) */
+.post-content .tab-link {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    height: 48px !important;
+    text-decoration: none !important;
+    color: #6B7280 !important;
+    border-radius: 25px !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    transition: all 0.2s ease !important;
+    background: transparent;
+}
+
+/* 활성화된 탭 (Active) */
+.post-content .tab-link.active {
+    background: white !important;
+    color: #3182F6 !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important;
+}
+
+/* ========== 4. 블로그 본문 가독성 강화 ========== */
 .post-content {
     max-width: 100%;
-    margin: 0 auto;
-    padding: 40px 0;
+    padding: 20px 0;
 }
 
-/* 본문 내 텍스트 가독성 */
+.post-content h1 { font-size: 38px; font-weight: 800; margin: 20px 0 30px; line-height: 1.3; }
+.post-content h2 { font-size: 32px; font-weight: 800; margin: 50px 0 20px; line-height: 1.4; }
+.post-content h3 { font-size: 26px; font-weight: 700; margin: 40px 0 16px; }
+
 .post-content p {
     font-size: 19px;
     line-height: 1.8;
@@ -160,207 +164,68 @@ body > .tab-wrapper {
     word-break: keep-all;
 }
 
-/* 본문 내 링크 */
-.post-content a {
-    text-decoration: none;
-}
+/* ========== 5. 생성기 전용 카드 및 버튼 스타일 ========== */
 
-/* ========== 5. 생성기 호환: 본문 내 탭 메뉴 재정의 ========== */
-/* 글 내용 안에 있는 .tab-wrapper는 고정을 해제하고 본문에 어울리게 디자인 */
-.post-content .tab-wrapper {
-    position: static !important; /* 고정 해제 */
-    background: transparent !important;
-    box-shadow: none !important;
-    padding: 0 0 30px 0 !important;
-    margin-top: -10px;
-}
-
-.post-content .tabs {
-    background: white;
-    border: 2px solid #f3f4f6;
-    border-radius: 16px;
-    padding: 8px;
-}
-
-.post-content .tab-link {
-    font-size: 18px; /* 본문 탭은 조금 더 크게 */
-    color: #4b5563;
-}
-
-.post-content .tab-link.active {
-    background: #eef6ff; /* 본문 탭 활성 배경색 변경 */
-    color: #3182F6;
-    box-shadow: none;
-}
-
-/* ========== 6. 생성기 호환: 카드 스타일 (aros-card) ========== */
-
-/* 공통 카드 레이아웃 */
-.aros-gray-card,
-.aros-gray-card-center,
-.aros-blue-card,
-.aros-white-card,
-.benefit-card {
+/* 카드 공통 스타일 */
+.aros-gray-card, .aros-gray-card-center, .aros-blue-card, .aros-white-card, .benefit-card {
     border-radius: 24px;
-    padding: 32px;
-    margin: 30px 0 !important; /* 인라인 스타일 강제 오버라이드 */
+    padding: 35px;
+    margin: 35px 0 !important;
     box-shadow: 0 4px 20px rgba(0,0,0,0.06);
     word-break: keep-all;
-    position: relative;
-    overflow: hidden;
 }
 
-/* 배경색 지정 */
 .aros-gray-card, .aros-gray-card-center { background: #F8F9FA; border: 1px solid #e9ecef; }
 .aros-blue-card { background: #EFF6FF; border: 1px solid #DBEAFE; }
-.aros-white-card { background: #FFFFFF; border: 1px solid #e5e7eb; }
-.benefit-card { background: #F0F9FF; border: 1px solid #dbeafe; }
 
-/* 1. 상단 주목도 높은 메시지 (Center Card) */
+/* 중앙 강조 카드 */
 .aros-gray-card-center {
     text-align: center;
-    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-    border: 2px solid #6528f7; /* 강조 테두리 */
+    border: 2px solid #6528f7;
 }
 
-.aros-gray-card-center h3 {
-    font-size: 22px;
-    color: #6528f7;
-    margin-bottom: 10px;
-    font-weight: 700;
-}
+.aros-gray-card-center h3 { font-size: 22px; color: #6528f7; margin-bottom: 10px; }
+.aros-gray-card-center h2 { font-size: 34px; font-weight: 900; margin: 0; }
 
-.aros-gray-card-center h2 {
-    font-size: 32px;
-    color: #1a1a1a;
-    margin: 0;
-    font-weight: 900;
-    line-height: 1.3;
-}
-
-/* 일반 카드 제목/본문 */
-.aros-gray-card h3, .benefit-title {
-    font-size: 26px;
-    color: #1f2937;
-    margin-bottom: 16px;
-    font-weight: 800;
-}
-
-.aros-gray-card p {
-    font-size: 18px;
-    color: #4b5563;
-    line-height: 1.7;
-    margin-bottom: 10px;
-}
-
-/* Flexbox 강제 조정 (3. 맞춤 섹션 등) */
-.aros-gray-card > div[style*="display: flex"] {
-    gap: 20px;
-}
-
-/* ========== 7. 생성기 호환: 버튼 스타일 (apply-container) ========== */
-/* .apply-container 혹은 .apply-container (오타 대응) */
+/* 본문 내 버튼 컨테이너 (3단 버튼 등) */
 .apply-container, [class*="apply-container"] {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 15px;
     margin: 30px 0;
-}
-
-.link-container {
-    width: 100%;
-}
-
-.custom-link {
-    text-decoration: none !important;
 }
 
 .button-container {
     background: #6528f7;
     color: white;
-    padding: 22px 24px;
+    padding: 24px;
     border-radius: 16px;
-    transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 4px 10px rgba(101, 40, 247, 0.2);
+    box-shadow: 0 4px 15px rgba(101, 40, 247, 0.2);
+    transition: transform 0.2s;
 }
 
-.button-container:hover {
-    transform: translateY(-2px);
-    background: #561ee3;
-    box-shadow: 0 6px 15px rgba(101, 40, 247, 0.3);
-}
+.button-container:hover { transform: translateY(-2px); }
 
-.button-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
+.button-text { font-size: 21px; font-weight: 800; }
 
-.button-text {
-    font-size: 20px;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-}
-
-/* 하단 버튼 (benefit-card 내부) */
-.bottom-button {
-    width: 100%;
-    background: #3182F6;
-    color: white;
-    border: none;
-    padding: 20px;
-    border-radius: 12px;
-    font-size: 19px;
-    font-weight: 700;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    margin-top: 20px;
-}
-
-/* ========== 8. 생성기 호환: 리스트 및 세부요소 ========== */
-
-/* 하이라이트 박스 (requirements) */
+/* 하이라이트 박스 및 리스트 */
 .highlight-box.requirements {
     background: white;
     border-radius: 16px;
-    padding: 24px;
+    padding: 25px;
     margin-top: 20px;
-    border: 1px solid #f1f5f9;
-}
-
-.requirement-item {
-    margin-bottom: 24px;
-}
-
-.requirement-item:last-child {
-    margin-bottom: 0;
 }
 
 .requirement-title {
     font-size: 20px !important;
-    font-weight: 700 !important;
+    font-weight: 800 !important;
     color: #6528f7 !important;
     margin-bottom: 8px !important;
-    display: block;
 }
 
-.requirement-desc {
-    font-size: 18px !important;
-    color: #4b5563 !important;
-    line-height: 1.6 !important;
-    margin: 0 !important;
-    padding-left: 4px;
-}
+.requirement-desc { font-size: 18px !important; line-height: 1.6 !important; color: #4b5563 !important; }
 
-/* 관련 글 리스트 (Benefit List) */
-.benefit-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
+/* 하단 관련 글 카드 */
 .benefit-item {
     background: white;
     padding: 20px;
@@ -368,69 +233,44 @@ body > .tab-wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-weight: 600;
-    font-size: 18px;
-    color: #333;
+    font-weight: 700;
+    margin-bottom: 10px;
     transition: all 0.2s;
-    border: 1px solid transparent;
+    border: 1px solid #f1f5f9;
 }
 
-.benefit-item:hover {
-    border-color: #3182F6;
-    color: #3182F6;
-    background: #f8fbff;
-    transform: translateX(5px);
-}
+.benefit-item:hover { transform: translateX(5px); color: #3182F6; border-color: #3182F6; }
 
-/* ========== 9. 반응형 (모바일 최적화) ========== */
+/* ========== 6. 완벽한 반응형 설정 ========== */
 @media (max-width: 768px) {
-    body {
-        padding-top: 120px;
-    }
+    body { padding-top: 120px; }
     
-    .container {
-        padding: 0 20px;
-    }
+    /* 탭 메뉴 모바일 대응 */
+    .post-content .tab-link { height: 44px; font-size: 15px; }
+    .post-content .tabs { padding: 4px; gap: 4px; }
 
-    /* 폰트 크기 조정 */
+    /* 카드 및 폰트 축소 */
+    .post-content h1 { font-size: 28px; }
+    .post-content h2 { font-size: 24px; }
     .post-content p { font-size: 18px; }
-    .aros-gray-card-center h2 { font-size: 26px; }
-    .aros-gray-card h3 { font-size: 22px; }
-    
-    /* 본문 내 탭 스크롤 가능하게 */
-    .post-content .tabs {
-        overflow-x: auto;
-        white-space: nowrap;
-        justify-content: flex-start;
-    }
-    .post-content .tab-item {
-        flex: 0 0 auto;
-        min-width: 100px;
-    }
 
-    /* 카드 Flex 해제 (모바일에서 세로 정렬) */
-    /* 인라인 스타일 flex를 강제로 column으로 변경 */
+    .aros-gray-card, .aros-gray-card-center { padding: 25px; }
+    .aros-gray-card-center h2 { font-size: 26px; }
+
+    /* 모바일에서 카드 내의 가로배치(Flex)를 세로로 강제 전환 */
     .aros-gray-card > div[style*="display: flex"] {
         flex-direction: column !important;
-        text-align: left !important;
         align-items: flex-start !important;
     }
-    
-    .aros-gray-card > div > div[style*="text-align: right"] {
+    .aros-gray-card div[style*="text-align: right"] {
         text-align: left !important;
-        margin-top: 10px;
-    }
-
-    /* 버튼 모바일 최적화 */
-    .button-text { font-size: 18px; }
-    .button-container { padding: 18px; }
-
-    /* 패딩 줄임 */
-    .aros-gray-card, .aros-gray-card-center, .benefit-card {
-        padding: 24px;
+        margin-top: 15px;
     }
     
-    .highlight-box.requirements {
-        padding: 20px;
-    }
+    .button-text { font-size: 19px; }
+}
+
+@media (max-width: 400px) {
+    .post-content .tab-link { font-size: 14px; padding: 0 4px; }
+    .logo-text { font-size: 20px; }
 }
