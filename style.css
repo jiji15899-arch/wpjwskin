@@ -121,7 +121,7 @@ body {
     display: flex;
     justify-content: space-between;
     gap: 8px;
-    list-style: none;
+    list-style: none !important;
     width: 100%;
     background: #f3f4f6;
     padding: 6px;
