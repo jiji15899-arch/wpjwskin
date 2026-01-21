@@ -247,36 +247,48 @@ function sup_page_tabs() {
             $sanitized_tabs[] = [
                 'name' => sanitize_text_field($tab['name']),
                 'link' => esc_url_raw($tab['link']),
+                // 체크박스가 체크되면 1, 아니면 0 저장
                 'is_active' => isset($tab['is_active']) ? 1 : 0
             ];
         }
         update_option('sup_final_tabs_data', $sanitized_tabs);
         echo '<div class="notice notice-success"><p>탭 설정이 저장되었습니다.</p></div>';
     }
-    $tabs = get_option('sup_final_tabs_data', array_fill(0, 3, ['name' => '', 'link' => '', 'is_active' => 1]));
+    // 기본값 설정 (기본적으로 체크박스는 해제 상태로 둠)
+    $tabs = get_option('sup_final_tabs_data', array_fill(0, 3, ['name' => '', 'link' => '', 'is_active' => 0]));
     ?>
     <div class="wrap">
         <h1>탭 메뉴 설정</h1>
+        <p>탭 이름을 입력하면 메뉴에 나타납니다. <strong>'강조 (Active)'</strong>를 체크하면 해당 탭이 파란색으로 표시됩니다.</p>
         <form method="post">
             <?php wp_nonce_field('sup_tabs_nonce', 'sup_tabs_nonce_field'); ?>
             <table class="form-table">
                 <thead>
                     <tr>
-                        <th>활성화</th>
-                        <th>탭 이름</th>
+                        <th style="width: 100px;">강조 (Active)</th>
+                        <th>탭 이름 (비워두면 숨김)</th>
                         <th>링크 URL</th>
                     </tr>
                 </thead>
                 <tbody>
                 <?php foreach ($tabs as $i => $tab): ?>
                 <tr>
-                    <td><input type="checkbox" name="tabs[<?php echo $i; ?>][is_active]" value="1" <?php checked($tab['is_active'], 1); ?>></td>
-                    <td><input type="text" name="tabs[<?php echo $i; ?>][name]" value="<?php echo esc_attr($tab['name']); ?>" placeholder="탭 이름" class="regular-text"></td>
-                    <td><input type="url" name="tabs[<?php echo $i; ?>][link]" value="<?php echo esc_url($tab['link']); ?>" placeholder="https://example.com" class="regular-text"></td>
+                    <td style="text-align: center;">
+                        <input type="checkbox" name="tabs[<?php echo $i; ?>][is_active]" value="1" <?php checked(isset($tab['is_active']) ? $tab['is_active'] : 0, 1); ?>>
+                    </td>
+                    <td>
+                        <input type="text" name="tabs[<?php echo $i; ?>][name]" value="<?php echo esc_attr($tab['name']); ?>" placeholder="예: 홈, 지원금, 정보" class="regular-text" style="width: 100%;">
+                    </td>
+                    <td>
+                        <input type="url" name="tabs[<?php echo $i; ?>][link]" value="<?php echo esc_url($tab['link']); ?>" placeholder="https://..." class="regular-text" style="width: 100%;">
+                    </td>
                 </tr>
                 <?php endforeach; ?>
                 </tbody>
             </table>
+            
+            <p class="description">※ 탭 이름이 입력된 항목만 실제 사이트에 노출됩니다.</p>
+            
             <p class="submit">
                 <input type="submit" name="save_tabs" class="button button-primary" value="탭 설정 저장">
             </p>
@@ -284,6 +296,7 @@ function sup_page_tabs() {
     </div>
     <?php
 }
+
 
 /**
  * 광고 설정 페이지
