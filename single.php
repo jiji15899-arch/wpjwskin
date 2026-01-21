@@ -41,11 +41,22 @@ get_header();
 
             <?php
             // 관련 포스트
+                        // 관련 포스트 (현재 글과 동일한 카테고리의 글만 랜덤으로 불러오기)
+            $categories = get_the_category();
+            $category_ids = array();
+            if ($categories) {
+                foreach ($categories as $category) {
+                    $category_ids[] = $category->term_id;
+                }
+            }
+
             $related_args = array(
-                'post__not_in' => array(get_the_ID()),
+                'category__in'   => $category_ids, // 같은 카테고리 ID 지정
+                'post__not_in'   => array(get_the_ID()), // 현재 글 제외
                 'posts_per_page' => 3,
-                'orderby' => 'rand'
+                'orderby'        => 'rand'
             );
+
             
             $related_posts = new WP_Query($related_args);
             
