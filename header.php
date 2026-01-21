@@ -3,7 +3,7 @@
  * Header Template
  * 관리자 페이지의 탭 설정과 연동된 버전입니다.
  */
-// functions.php에서 정의한 설정값을 가져옵니다. (없을 경우 기본값 반환)
+// functions.php에서 정의한 설정값을 가져옵니다.
 $config = get_option('sup_site_config', [
     'site_title' => get_bloginfo('name'),
     'default_link' => home_url()
@@ -36,19 +36,22 @@ $config = get_option('sup_site_config', [
                     <?php
                     // functions.php에서 저장한 탭 데이터를 가져옵니다.
                     $tabs = get_option('sup_final_tabs_data', []);
-                    $has_active_tab = false;
-
+                    
+                    // 탭 데이터가 있고 배열인 경우
                     if (!empty($tabs) && is_array($tabs)) {
                         foreach ($tabs as $index => $tab) {
-                            // 1. 탭 이름이 있고 2. 활성화(is_active) 상태가 1인 경우에만 출력
-                            $name = isset($tab['name']) ? $tab['name'] : '';
+                            // 데이터 가져오기
+                            $name = isset($tab['name']) ? trim($tab['name']) : '';
                             $link = isset($tab['link']) ? $tab['link'] : '#';
-                            $is_active = (!isset($tab['is_active']) || $tab['is_active'] == 1);
+                            
+                            // 관리자 페이지에서 체크박스를 켰는지 확인 (켜면 1, 아니면 0)
+                            // 이 값이 true면 해당 탭을 'active' 상태(강조)로 만듭니다.
+                            $is_highlighted = (isset($tab['is_active']) && $tab['is_active'] == 1);
 
-                            if (!empty($name) && $is_active) {
-                                $has_active_tab = true;
-                                // 첫 번째 활성 탭에 active 클래스 부여
-                                $active_class = ($index === 0) ? ' active' : '';
+                            // 조건: 탭 이름이 있는 경우에만 화면에 표시
+                            if (!empty($name)) {
+                                // 체크되어 있다면 active 클래스 추가
+                                $active_class = $is_highlighted ? ' active' : '';
                                 ?>
                                 <li class="tab-item">
                                     <a class="tab-link<?php echo $active_class; ?>" href="<?php echo esc_url($link); ?>">
@@ -58,10 +61,8 @@ $config = get_option('sup_site_config', [
                                 <?php
                             }
                         }
-                    }
-
-                    // 활성화된 탭이 하나도 없으면 '홈' 메뉴를 기본으로 보여줍니다.
-                    if (!$has_active_tab) {
+                    } else {
+                        // 탭 데이터가 아예 없을 때 기본 홈 버튼 표시 (선택사항)
                         echo '<li class="tab-item"><a class="tab-link active" href="' . esc_url(home_url()) . '">홈</a></li>';
                     }
                     ?>
