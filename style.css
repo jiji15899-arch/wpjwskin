@@ -1443,9 +1443,9 @@ body {
 /* ========== 혜택 카드 (관련 글) ========== */
 .benefit-card {
     background: rgb(248, 249, 251);
-    border-radius: 16px;
-    margin: 20px 0;
-    padding: 25px;
+    border-radius: 20px;
+    margin: 24px 0;
+    padding: 30px;
 }
 
 .benefit-card a {
@@ -1455,15 +1455,16 @@ body {
 .benefit-title {
     align-items: center;
     display: flex;
-    margin-bottom: 20px;
-    font-size: 20px;
+    margin-bottom: 24px;
+    font-size: 26px;
     font-weight: bold;
     color: #333;
 }
 
 .benefit-title .icon {
     color: #ff4d4d;
-    margin-right: 8px;
+    margin-right: 10px;
+    font-size: 26px;
 }
 
 .benefit-list {
@@ -1484,7 +1485,7 @@ body {
     display: flex;
     justify-content: space-between;
     margin-bottom: 12px;
-    padding: 16px;
+    padding: 18px;
     transition: 0.3s;
 }
 
@@ -1497,6 +1498,8 @@ body {
     color: #333333;
     font-weight: 600;
     letter-spacing: -0.5px;
+    font-size: 16px;
+    line-height: 1.5;
 }
 
 /* ========== 광고 카드 스타일 ========== */
@@ -1710,12 +1713,12 @@ body {
 
     .aros-gray-card h2,
     .aros-gray-card-center h2 {
-        font-size: 30px;
+        font-size: 34px;
     }
 
     .aros-gray-card h3,
     .aros-gray-card-center h3 {
-        font-size: 24px;
+        font-size: 28px;
     }
 
     .aros-gray-card .apply-date-text {
@@ -1726,9 +1729,21 @@ body {
         font-size: 24px;
     }
 
+    .aros-gray-card .requirement-title {
+        font-size: 19px;
+    }
+
     .aros-blue-card h2,
     .aros-white-card h2 {
+        font-size: 26px;
+    }
+
+    .benefit-title {
         font-size: 24px;
+    }
+
+    .benefit-text {
+        font-size: 15px;
     }
 
     .aros-gray-card,
@@ -1810,17 +1825,29 @@ body {
 
     .aros-gray-card h2,
     .aros-gray-card-center h2 {
-        font-size: 26px;
+        font-size: 30px;
     }
 
     .aros-gray-card h3,
     .aros-gray-card-center h3 {
-        font-size: 22px;
+        font-size: 26px;
+    }
+
+    .aros-gray-card .requirement-title {
+        font-size: 18px;
     }
 
     .aros-blue-card h2,
     .aros-white-card h2 {
+        font-size: 24px;
+    }
+
+    .benefit-title {
         font-size: 22px;
+    }
+
+    .benefit-text {
+        font-size: 15px;
     }
 
     .aros-gray-card,
