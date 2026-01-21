@@ -162,6 +162,13 @@ body {
     color: #3182F6;
     box-shadow: 0 2px 5px rgba(0,0,0,0.08);
 }
+/* 추가적인 스타일 리셋 */
+tab-item::before,
+tab-item::after {
+content: none !important;
+display: none !important;
+    
+}
 
 /* ========== 메인 인트로 및 공통 요소 ========== */
 .intro-section {
